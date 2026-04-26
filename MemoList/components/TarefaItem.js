@@ -21,19 +21,24 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center', // Para alinhar o Switch verticalmente
+    alignItems: 'center',
     padding: 12,
     marginVertical: 4,
     backgroundColor: '#f0f0f0',
     borderRadius: 8,
   },
   tarefaConcluida: {
-    backgroundColor: '#e0ffe0', // Um tom mais claro de verde para tarefas concluídas
+    backgroundColor: '#e0ffe0',
   },
-  texto: { fontSize: 16, flex: 1, marginLeft: 10 }, // Adicionado flex e margin para o texto
+  texto: { 
+    fontSize: 16, 
+    flex: 1, marginLeft: 10 
+  }, 
   textoConcluido: {
     textDecorationLine: 'line-through',
     color: '#888',
   },
-  remover: { fontSize: 18 },
+  remover: { 
+    fontSize: 18 
+  }
 });
