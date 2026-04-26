@@ -28,8 +28,8 @@ fotoContainer: {
     borderWidth: 1,
     borderRadius: 60,
     borderColor: '#C5A8F9',
-    alignItems: 'center', // Centers children horizontally
-    justifyContent: 'center', // Centers children vertically
+    alignItems: 'center',
+    justifyContent: 'center',
 },
 foto:{
     fontSize: 31, 
