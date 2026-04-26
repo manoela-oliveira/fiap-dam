@@ -65,10 +65,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   cardTexto: {
-    color: '#fffdfd', // Cor do texto
-    fontWeight: 'bold', // Negrito
-    fontSize: 16, // Tamanho da fonte
-    // Opcional: textAlign: 'center' ainda pode ser usado, mas justifyContent/alignItems no View pai farão a maior parte do trabalho
+    color: '#fffdfd',
+    fontWeight: 'bold',
+    fontSize: 16,
     textAlign: 'center',
   },
   voltar: { 
