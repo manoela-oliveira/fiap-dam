@@ -7,16 +7,30 @@ export default function App() {
   }
   const [count, setCount] = useState(0);
   const [mensagem, setMensagem] = useState('Clique no nosso copinho virtual toda vez que beber um na vida real 😊');
+  const [backgroundColor, setBackgroundColor] = useState('#0f90e6');
 
   useEffect(() => {
-    if (count === 0) setMensagem('Clique no nosso copinho virtual toda vez que beber um na vida real 😊');
-    if (count === 8) setMensagem('Você atingiu sua meta, parabéns 🎉');
-    if (count === 12) setMensagem('Hoje você se  superou! Continue arrasando 👍');
-    if (count === 15) setMensagem('Tudo em exagero faz mal!\n Chegou a hora de parar 🚫');
+    if (count === 0) {
+      setMensagem('Clique no nosso copinho virtual toda vez que beber um na vida real 😊');
+      setBackgroundColor('#0f90e6');
+    }
+    if (count === 8) {
+      setMensagem('Você atingiu sua meta, parabéns 🎉');
+      setBackgroundColor('#20e2c8');
+    }
+    if (count === 12) {
+      setMensagem('Hoje você se superou! Continue arrasando 👍');
+      setBackgroundColor('#20e2c8'); // Cor amarela para superação
+    }
+    if (count === 15) {
+      setMensagem('Tudo em exagero faz mal!\n Chegou a hora de parar 🚫');
+      setBackgroundColor('#261bbd');
+    }
   }, [count]);
 
   return (
-    <View style={styles.container}>
+    // Aplicação de cor de fundo dinâmica
+    <View style={[styles.container, { backgroundColor: backgroundColor }]}>
 
       <Text style={styles.titulo}> Hidrate-se! </Text>
 
@@ -29,10 +43,10 @@ export default function App() {
         <Image source={icon.icone} style={styles.iconeAgua}/>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-      style={[styles.botao, styles.botaoZerar]}
-      onPress={() => setCount(0)}>
-      <Text style={styles.textoBotao}>Novo dia</Text>
+      <TouchableOpacity
+        style={[styles.botao, styles.botaoZerar]}
+        onPress={() => setCount(0)}>
+        <Text style={styles.textoBotao}>Novo dia</Text>
       </TouchableOpacity>
 
     </View>
@@ -44,7 +58,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0f90e6'
   },
   iconeAgua: {
     width: 190,
@@ -98,5 +111,4 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10
   },
-
 });
