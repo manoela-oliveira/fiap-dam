@@ -8,9 +8,15 @@ export default function Sobre() {
       <Text style={styles.subTitulo}>3° Semestre</Text>
       <Text style={styles.descricao}>▫ Tecnologias favoritas ▫</Text>
       <View style={styles.cardsContainer}>
-        <Text style={styles.card}>MO</Text>
-        <Text style={styles.card}>MO</Text>
-        <Text style={styles.card}>MO</Text>
+         <View style={styles.card}>
+         <Text style={styles.cardTexto}>Java</Text>
+         </View>
+         <View style={styles.card}>
+         <Text style={styles.cardTexto}>Python</Text>
+         </View>
+         <View style={styles.card}>
+         <Text style={styles.cardTexto}>ReactNative</Text>
+         </View>
         </View>
       <TouchableOpacity onPress={() => router.back()}>
         <Text style={styles.voltar}>← Voltar</Text>
@@ -43,17 +49,27 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     width: 350,
-    height: 400,
+    height: 130,
     marginBottom: 20,
-    alignItems: 'center', 
-    justifyContent: 'center',
-    backgroundColor: '#9BD7FB'
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   card: {
     textAlign:'center',
-    padding: 40,
-    marginBottom: 10,
-    backgroundColor: 'red'
+    justifyContent: 'center',
+    alignItems: 'center', 
+    width: 110,
+    height: 110,
+    backgroundColor: '#9BD7FB',
+    borderRadius: 5,
+  },
+  cardTexto: {
+    color: '#fffdfd', // Cor do texto
+    fontWeight: 'bold', // Negrito
+    fontSize: 16, // Tamanho da fonte
+    // Opcional: textAlign: 'center' ainda pode ser usado, mas justifyContent/alignItems no View pai farão a maior parte do trabalho
+    textAlign: 'center',
   },
   voltar: { 
     fontSize: 16, 
