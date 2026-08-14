@@ -10,10 +10,11 @@ export default function CarrinhoScreen() {
 
   return (  
     <View style={styles.container}>
+      
       <View style={styles.tituloContainer}>
         <Image source={imgCarrinho} style={styles.tituloIcone} />
         <Text style={styles.titulo}>Meu Carrinho</Text> 
-      </View> 
+      </View>
       
       {carrinho.length === 0 ? ( 
         <Text style={styles.mensagemVazio}>Seu carrinho está vazio!</Text> 
@@ -25,7 +26,12 @@ export default function CarrinhoScreen() {
             renderItem={({ item }) => (  
               <View style={styles.card}>
                 <View style={styles.infoContainer}>
-                  <Image source={item.imagem} style={styles.icone} />
+                  
+                  <Image 
+                    source={item.imagem} 
+                    style={[styles.iconeBase, { width: item.width, height: item.height }]} 
+                  />
+                  
                   <View>
                     <Text style={styles.nome}>{item.nome}</Text>
                     <Text>R$ {item.preco.toFixed(2)}</Text>
@@ -47,14 +53,12 @@ export default function CarrinhoScreen() {
 
 const styles = StyleSheet.create({ 
   container: { flex: 1, padding: 20, paddingTop: 60 }, 
-
   tituloContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
-  tituloIcone: { width: 32, height: 32, marginRight: 10 },
+  tituloIcone: { width: 60, height: 60, marginRight: 5 },
   titulo: { fontSize: 24, fontWeight: 'bold' }, 
-
   card: { backgroundColor: '#f0f0f0', padding: 15, marginVertical: 8, borderRadius: 10 }, 
-  infoContainer: { flexDirection: 'row', alignItems: 'center' },
-  icone: { width: 40, height: 40, marginRight: 15 },
+  infoContainer: { flexDirection: 'row', alignItems: 'center' }, 
+  iconeBase: { resizeMode: 'contain', marginRight: 15 }, 
   nome: { fontSize: 16, fontWeight: '600' }, 
   totalContainer: { marginTop: 20, borderTopWidth: 1, borderColor: '#ccc', paddingTop: 10, alignItems: 'flex-end' }, 
   totalTexto: { fontSize: 20, fontWeight: 'bold', color: '#333', marginBottom: 10 }, 
