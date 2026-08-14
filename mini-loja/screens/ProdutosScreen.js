@@ -2,13 +2,24 @@ import { View, Text, FlatList, Button, StyleSheet, Image } from 'react-native';
 import { produtos } from '../data/produtos';
 import { useCarrinho } from '../context/ContextCarrinho'; 
 
+const imgSacola = require('../assets/sacolas-compras.png');
+const imgCarrinho = require('../assets/carrinho-compras.png');
+
 export default function ProdutosScreen() { 
   const { adicionar, carrinho } = useCarrinho(); 
   
   return (  
     <View style={styles.container}>
-      <Text style={styles.titulo}>🛍️ Produtos</Text>
-      <Text>🛒 Itens no carrinho: {carrinho.length}</Text> 
+      
+      <View style={styles.tituloContainer}>
+        <Image source={imgSacola} style={styles.tituloIcone} />
+        <Text style={styles.titulo}>Produtos</Text>
+      </View>
+
+       <View style={styles.statusCarrinhoContainer}>
+        <Image source={imgCarrinho} style={styles.statusCarrinhoIcone} />
+        <Text style={styles.statusCarrinhoTexto}>Itens no carrinho: {carrinho.length}</Text> 
+      </View>
       
       <FlatList 
         data={produtos} 
@@ -33,7 +44,15 @@ export default function ProdutosScreen() {
 
 const styles = StyleSheet.create({ 
   container: { flex: 1, padding: 20, paddingTop: 60 }, 
-  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 }, 
+
+  tituloContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
+  tituloIcone: { width: 32, height: 32, marginRight: 10 },
+  titulo: { fontSize: 24, fontWeight: 'bold' }, 
+  
+  statusCarrinhoContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 15 },
+  statusCarrinhoIcone: { width: 22, height: 22, marginRight: 8 },
+  statusCarrinhoTexto: { fontSize: 16, color: '#555' },
+
   card: { backgroundColor: '#f0f0f0', padding: 15, marginVertical: 8, borderRadius: 10 }, 
   infoContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
   icone: { width: 40, height: 40, marginRight: 15 },
