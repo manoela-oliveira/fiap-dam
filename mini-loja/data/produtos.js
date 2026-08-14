@@ -7,5 +7,5 @@ export const produtos = [
   { id: '6', nome: 'Caixinha Misteriosa', preco: 189.90, imagem: require('../assets/caixa-misteriosa.png'), width: 40, height: 40},
   { id: '7', nome: 'Câmera Profissional', preco: 189.90, imagem: require('../assets/camera-profissional.png'), width: 40, height: 40},
   { id: '8', nome: 'Disco Rígido', preco: 189.90, imagem: require('../assets/disco-rigido.png'), width: 45, height: 45},
-  { id: '9', nome: 'Pelúcia Estranha...', preco: 189.90, imagem: require('../assets/pelucia-esquisita.png'), width: 60, height: 60}
+  { id: '9', nome: 'Pelúcia Estranha...', preco: 189.90, imagem: require('../assets/pelucia-esquisita.png'), width: 50, height: 50}
 ];

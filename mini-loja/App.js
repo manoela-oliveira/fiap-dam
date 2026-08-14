@@ -16,7 +16,7 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007bff" />
+        <ActivityIndicator size="large" color="#676767" />
       </View>
     );
   }
@@ -28,12 +28,12 @@ export default function App() {
           <Button
             title="Produtos"
             onPress={() => setTelaAtual('Produtos')}
-            color={telaAtual === 'Produtos' ? '#007bff' : '#ccc'}
+            color={telaAtual === 'Produtos' ? '#ac37ca' : '#a8a8a8'}
           />
           <Button
             title="Carrinho"
             onPress={() => setTelaAtual('Carrinho')}
-            color={telaAtual === 'Carrinho' ? '#007bff' : '#ccc'}
+            color={telaAtual === 'Carrinho' ? '#ac37ca' : '#a8a8a8'}
           />
         </View>
 
@@ -46,21 +46,22 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#181818'
   },
   navContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#282828',
     paddingTop: 40, 
-    backgroundColor: '#fff',
+    backgroundColor: '#181818',
   },
 
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#181818',
   },
 });

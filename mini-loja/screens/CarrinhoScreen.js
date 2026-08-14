@@ -34,7 +34,7 @@ export default function CarrinhoScreen() {
                   
                   <View>
                     <Text style={styles.nome}>{item.nome}</Text>
-                    <Text>R$ {item.preco.toFixed(2)}</Text>
+                    <Text style={styles.preco}>R$ {item.preco.toFixed(2)}</Text>
                   </View>
                 </View>
               </View>
@@ -55,12 +55,13 @@ const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, paddingTop: 60 }, 
   tituloContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 20 },
   tituloIcone: { width: 60, height: 60, marginRight: 5 },
-  titulo: { fontSize: 20, fontFamily: 'PixelRetro', color: '#333'}, 
-  card: { backgroundColor: '#f0f0f0', padding: 15, marginVertical: 8, borderRadius: 10 }, 
+  titulo: { fontSize: 20, fontFamily: 'PixelRetro', color: '#dbdada'}, 
+  card: { backgroundColor: '#272729', padding: 15, marginVertical: 8, borderRadius: 5, borderWidth: 1, borderColor: '#3b3b3b' },
   infoContainer: { flexDirection: 'row', alignItems: 'center' }, 
   iconeBase: { resizeMode: 'contain', marginRight: 15 }, 
-  nome: { fontSize: 12,fontFamily: 'PixelRetro', color: '#333'},
+  nome: { fontSize: 12,fontFamily: 'PixelRetro', color: '#c6c6c6'},
   totalContainer: { marginTop: 20, borderTopWidth: 1, borderColor: '#ccc', paddingTop: 10, alignItems: 'flex-end' }, 
   totalTexto: { fontSize: 20, fontWeight: 'bold', color: '#333', marginBottom: 10 }, 
   mensagemVazio: { fontSize: 18, textAlign: 'center', marginTop: 50, color: '#555' }, 
+  preco: { fontSize: 14, fontWeight: 'bold', color: '#d5d5d5' }
 });
