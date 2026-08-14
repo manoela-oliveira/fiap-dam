@@ -48,14 +48,14 @@ export default function ProdutosScreen() {
 
 const styles = StyleSheet.create({ 
   container: { flex: 1, padding: 20, paddingTop: 60 }, 
-  tituloContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
-  tituloIcone: { width: 45, height: 50, marginRight: 5},
-  titulo: { fontSize: 24, fontWeight: 'bold' }, 
+  tituloContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 5 },
+  tituloIcone: { width: 55, height: 50, marginRight: 5},
+  titulo: { fontSize: 20, fontFamily: 'PixelRetro', color: '#333'}, 
   statusCarrinhoContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 15 },
   statusCarrinhoIcone: { width: 30, height: 30, marginRight: 5 },
   statusCarrinhoTexto: { fontSize: 16, color: '#555' },
   card: { backgroundColor: '#f0f0f0', padding: 15, marginVertical: 8, borderRadius: 10 }, 
   infoContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 }, 
   iconeBase: { resizeMode: 'contain', marginRight: 15 }, 
-  nome: { fontSize: 16, fontWeight: '600' }, 
+  nome: { fontSize: 12, fontFamily: 'PixelRetro', color: '#333'}, 
 });

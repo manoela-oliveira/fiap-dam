@@ -1,11 +1,25 @@
 import { useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { CarrinhoProvider } from './context/ContextCarrinho';
 import ProdutosScreen from './screens/ProdutosScreen';
 import CarrinhoScreen from './screens/CarrinhoScreen';
 
+import { useFonts, PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
+
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    'PixelRetro': PressStart2P_400Regular,
+  });
+
   const [telaAtual, setTelaAtual] = useState('Produtos');
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007bff" />
+      </View>
+    );
+  }
 
   return (
     <CarrinhoProvider>
@@ -40,6 +54,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc',
     paddingTop: 40, 
+    backgroundColor: '#fff',
+  },
+
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#fff',
   },
 });

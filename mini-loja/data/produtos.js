@@ -3,6 +3,9 @@ export const produtos = [
   { id: '2', nome: 'Teclado Mecânico', preco: 349.90, imagem: require('../assets/teclado.png'), width: 60, height: 60},
   { id: '3', nome: 'Mouse Gamer', preco: 159.90, imagem: require('../assets/mouse.png'), width: 60, height: 60},
   { id: '4', nome: 'Monitor Ultrawide', preco: 1299.90, imagem: require('../assets/monitor.png'), width: 60, height: 60},
-  { id: '5', nome: 'Controle sem Fio', preco: 299.90, imagem: require('../assets/controle-videogame.png'), width: 40, height: 40},
-  { id: '6', nome: 'Webcam Full HD', preco: 189.90, imagem: require('../assets/caixa-misteriosa.png'), width: 40, height: 40}
+  { id: '5', nome: 'Controle Bluetooth', preco: 299.90, imagem: require('../assets/controle-videogame.png'), width: 40, height: 40},
+  { id: '6', nome: 'Caixinha Misteriosa', preco: 189.90, imagem: require('../assets/caixa-misteriosa.png'), width: 40, height: 40},
+  { id: '7', nome: 'Câmera Profissional', preco: 189.90, imagem: require('../assets/camera-profissional.png'), width: 40, height: 40},
+  { id: '8', nome: 'Disco Rígido', preco: 189.90, imagem: require('../assets/disco-rigido.png'), width: 45, height: 45},
+  { id: '9', nome: 'Pelúcia Estranha...', preco: 189.90, imagem: require('../assets/pelucia-esquisita.png'), width: 60, height: 60}
 ];
