@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity,
   Alert, StyleSheet, KeyboardAvoidingView, Platform, 
-  ScrollView, Keyboard
+  ScrollView, Keyboard, Image // Importado o Image
 } from 'react-native';
 
 export default function App() {
@@ -54,9 +54,14 @@ export default function App() {
         // Permite clicar no botão diretamente mesmo com o teclado aberto
         keyboardShouldPersistTaps="handled" 
       >
-        <Text style={styles.titulo}>🔐 Cadastro</Text>
+        <View style={styles.headerContainer}>
+          <Image 
+            source={require('./assets/cadeado.png')} 
+            style={styles.iconeCadeado} 
+          />
+          <Text style={styles.titulo}>Cadastro</Text>
+        </View>
 
-        {/* Nome de Usuário */}
         <TextInput
           placeholder="Nome de usuário"
           value={nome}
@@ -66,7 +71,6 @@ export default function App() {
         />
         {erros.nome && <Text style={styles.erro}>{erros.nome}</Text>}
 
-        {/* E-mail */}
         <TextInput
           placeholder="E-mail"
           value={email}
@@ -77,7 +81,6 @@ export default function App() {
         />
         {erros.email && <Text style={styles.erro}>{erros.email}</Text>}
 
-        {/* Senha */}
         <View style={styles.senhaContainer}>
           <TextInput
             placeholder="Senha"
@@ -86,16 +89,22 @@ export default function App() {
             secureTextEntry={!senhaVisivel}
             style={[styles.input, { flex: 1, marginBottom: 0, borderWidth: 0 }]}
           />
-          <Text
+          <TouchableOpacity 
             onPress={() => setSenhaVisivel(!senhaVisivel)}
-            style={styles.olho}
+            style={styles.botaoOlho}
           >
-            {senhaVisivel ? '🙈' : '👁️'}
-          </Text>
+            <Image 
+              source={
+                senhaVisivel 
+                  ? require('./assets/bloqueio-visibilidade.png') 
+                  : require('./assets/visibilidade.png')
+              } 
+              style={styles.iconeOlho}
+            />
+          </TouchableOpacity>
         </View>
         {erros.senha && <Text style={styles.erro}>{erros.senha}</Text>}
 
-        {/* Confirmar Senha */}
         <View style={styles.senhaContainer}>
           <TextInput
             placeholder="Confirmar senha"
@@ -104,12 +113,19 @@ export default function App() {
             secureTextEntry={!confirmarSenhaVisivel}
             style={[styles.input, { flex: 1, marginBottom: 0, borderWidth: 0 }]}
           />
-          <Text
+          <TouchableOpacity 
             onPress={() => setConfirmarSenhaVisivel(!confirmarSenhaVisivel)}
-            style={styles.olho}
+            style={styles.botaoOlho}
           >
-            {confirmarSenhaVisivel ? '🙈' : '👁️'}
-          </Text>
+            <Image 
+              source={
+                confirmarSenhaVisivel 
+                  ? require('./assets/bloqueio-visibilidade.png') 
+                  : require('./assets/visibilidade.png')
+              } 
+              style={styles.iconeOlho}
+            />
+          </TouchableOpacity>
         </View>
         {erros.confirmarSenha && <Text style={styles.erro}>{erros.confirmarSenha}</Text>}
 
@@ -137,9 +153,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
   },
+  headerContainer: {
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  iconeCadeado: {
+    width: 60,
+    height: 60,
+    marginBottom: 12,
+    resizeMode: 'contain',
+  },
   titulo: {
     fontSize: 32, fontWeight: 'bold',
-    textAlign: 'center', marginBottom: 32, color: '#333',
+    textAlign: 'center', color: '#333',
   },
   input: {
     backgroundColor: '#fff', borderWidth: 1, borderColor: '#ddd',
@@ -150,7 +176,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', borderWidth: 1, borderColor: '#ddd',
     borderRadius: 10, marginBottom: 8,
   },
-  olho: { padding: 14, fontSize: 20 },
+  botaoOlho: {
+    padding: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconeOlho: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
   erro: { color: 'red', marginBottom: 8, marginLeft: 4 },
   botao: {
     borderRadius: 10,
@@ -160,7 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#6c47ff',
   },
   botaoValido: {
-    backgroundColor: '#2e7d32', // Verde
+    backgroundColor: '#2e7d32',
   },
   botaoTexto: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
 });
