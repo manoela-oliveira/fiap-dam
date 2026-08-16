@@ -20,7 +20,9 @@ const formatarTel = (v) =>
    .slice(0, 15);
 
 // Perfis disponíveis
-const PERFIS = ['Estudante', 'Profissional', 'Freelancer'];
+const perfis = ['Estudante', 'Profissional', 'Freelancer'];
+
+const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Campo deve ficar fora de App para evitar recriações (teclado "piscando")
 const Campo = ({ label, erro, children }) => (
@@ -45,14 +47,22 @@ export default function App() {
   const cpfRef   = useRef(null);
   const telRef   = useRef(null);
 
+  const formularioValido = 
+    nome.trim().length > 0 &&
+    email_regex.test(email) &&
+    cpf.length === 14 &&
+    tel.length >= 14 &&
+    perfil !== '' &&
+    termos;
+
   const validar = () => {
     const e = {};
-    if (!nome.trim())          e.nome   = 'Nome obrigatório';
-    if (!email.includes('@'))  e.email  = 'E-mail inválido';
-    if (cpf.length < 14)       e.cpf    = 'CPF incompleto';
-    if (tel.length < 14)       e.tel    = 'Telefone incompleto';
-    if (!perfil)               e.perfil = 'Escolha um perfil';
-    if (!termos)               e.termos = 'Aceite os termos para continuar';
+    if (!nome.trim())              e.nome   = 'Nome obrigatório';
+    if (!email_regex.test(email))  e.email  = 'E-mail inválido';
+    if (cpf.length < 14)           e.cpf    = 'CPF incompleto';
+    if (tel.length < 14)           e.tel    = 'Telefone incompleto';
+    if (!perfil)                   e.perfil = 'Escolha um perfil';
+    if (!termos)                   e.termos = 'Aceite os termos para continuar';
     setErros(e);
     return Object.keys(e).length === 0;
   };
@@ -139,7 +149,7 @@ export default function App() {
 
         <Campo label="Perfil" erro={erros.perfil}>
           <View style={styles.chips}>
-            {PERFIS.map((op) => (
+            {perfis.map((op) => (
               <TouchableOpacity
                 key={op}
                 onPress={() => {
@@ -171,7 +181,11 @@ export default function App() {
         {erros.termos ? <Text style={styles.erro}>{erros.termos}</Text> : null}
 
         <TouchableOpacity
-          style={[styles.botao, carregando && { opacity: 0.6 }]}
+          style={[
+            styles.botao, 
+            formularioValido && styles.botaoValido,
+            carregando && { opacity: 0.6 }
+          ]}
           onPress={handleSubmit}
           disabled={carregando}
         >
@@ -268,6 +282,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+  },
+  botaoValido: {
+    backgroundColor: '#B24554',
+    shadowColor: '#B24554',
   },
   botaoTexto: { 
     color: '#FFF', 
