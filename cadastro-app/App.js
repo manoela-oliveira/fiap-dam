@@ -22,6 +22,15 @@ const formatarTel = (v) =>
 // Perfis disponíveis
 const PERFIS = ['Estudante', 'Profissional', 'Freelancer'];
 
+// Campo deve ficar fora de App para evitar recriações (teclado "piscando")
+const Campo = ({ label, erro, children }) => (
+  <View style={styles.campoWrapper}>
+    <Text style={styles.label}>{label}</Text>
+    {children}
+    {erro ? <Text style={styles.erro}>{erro}</Text> : null}
+  </View>
+);
+
 export default function App() {
   const [nome, setNome]             = useState('');
   const [email, setEmail]           = useState('');
@@ -55,17 +64,9 @@ export default function App() {
     setCarregando(true);
     setTimeout(() => {
       setCarregando(false);
-      Alert.alert('🎉 Cadastro realizado!', `Bem-vindo(a), ${nome}!`);
+      Alert.alert('❀ Cadastro realizado!', `Bem-vindo(a), ${nome}!`);
     }, 1500);
   };
-
-  const Campo = ({ label, erro, children }) => (
-    <View style={styles.campoWrapper}>
-      <Text style={styles.label}>{label}</Text>
-      {children}
-      {erro ? <Text style={styles.erro}>{erro}</Text> : null}
-    </View>
-  );
 
   return (
     <KeyboardAvoidingView
@@ -78,7 +79,7 @@ export default function App() {
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.titulo}>✿ Cadastro ✿</Text>
-        <Text style={styles.subtitulo}>Preencha os campos abaixo e se torne parte do nosso time!</Text>
+        <Text style={styles.subtitulo}>Preencha os campos abaixo e torne-se parte do nosso time!</Text>
 
         <Campo label="Nome completo" erro={erros.nome}>
           <TextInput
@@ -95,7 +96,7 @@ export default function App() {
         <Campo label="E-mail" erro={erros.email}>
           <TextInput
             ref={emailRef}
-            placeholder="maria@email.com"
+            placeholder="exemplo@email.com"
             placeholderTextColor="#C4ADB0"
             value={email}
             onChangeText={setEmail}
