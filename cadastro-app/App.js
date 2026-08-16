@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity,
   Switch, ScrollView, Alert, StyleSheet,
-  KeyboardAvoidingView, Platform,
+  KeyboardAvoidingView, Platform, Keyboard,
 } from 'react-native';
 
 // Funções de máscara
@@ -49,6 +49,8 @@ export default function App() {
   };
 
   const handleSubmit = () => {
+    Keyboard.dismiss();
+
     if (!validar()) return;
     setCarregando(true);
     setTimeout(() => {
@@ -67,12 +69,13 @@ export default function App() {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.containerKeyboard}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView
-        contentContainerStyle={styles.container}
+        contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <Text style={styles.titulo}>✿ Cadastro ✿</Text>
         <Text style={styles.subtitulo}>Preencha os campos abaixo e se torne parte do nosso time!</Text>
@@ -80,6 +83,7 @@ export default function App() {
         <Campo label="Nome completo" erro={erros.nome}>
           <TextInput
             placeholder="Ex: Maria Silva"
+            placeholderTextColor="#C4ADB0"
             value={nome}
             onChangeText={setNome}
             returnKeyType="next"
@@ -92,6 +96,7 @@ export default function App() {
           <TextInput
             ref={emailRef}
             placeholder="maria@email.com"
+            placeholderTextColor="#C4ADB0"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -106,6 +111,7 @@ export default function App() {
           <TextInput
             ref={cpfRef}
             placeholder="000.000.000-00"
+            placeholderTextColor="#C4ADB0"
             value={cpf}
             onChangeText={(v) => setCpf(formatarCPF(v))}
             keyboardType="numeric"
@@ -120,6 +126,7 @@ export default function App() {
           <TextInput
             ref={telRef}
             placeholder="(11) 99999-9999"
+            placeholderTextColor="#C4ADB0"
             value={tel}
             onChangeText={(v) => setTel(formatarTel(v))}
             keyboardType="phone-pad"
@@ -134,10 +141,13 @@ export default function App() {
             {PERFIS.map((op) => (
               <TouchableOpacity
                 key={op}
-                onPress={() => setPerfil(op)}
+                onPress={() => {
+                  Keyboard.dismiss();
+                  setPerfil(op);
+                }}
                 style={[styles.chip, perfil === op && styles.chipAtivo]}
               >
-                <Text style={{ color: perfil === op ? '#fff' : '#555' }}>
+                <Text style={[styles.chipTexto, perfil === op && styles.chipTextoAtivo]}>
                   {op}
                 </Text>
               </TouchableOpacity>
@@ -148,8 +158,12 @@ export default function App() {
         <View style={styles.termosRow}>
           <Switch
             value={termos}
-            onValueChange={setTermos}
-            trackColor={{ false: '#ccc', true: '#6c47ff' }}
+            onValueChange={(val) => {
+              Keyboard.dismiss();
+              setTermos(val);
+            }}
+            trackColor={{ false: '#E0CCD0', true: '#D97E8B' }}
+            thumbColor={termos ? '#FFF' : '#F5F5F5'}
           />
           <Text style={styles.termosText}>Aceito os termos de uso</Text>
         </View>
@@ -170,58 +184,94 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1, // Alterado para flexGrow para preencher toda a tela no ScrollView
+  containerKeyboard: {
+    flex: 1,
+    backgroundColor: '#FFF0F2', 
+  },
+  scrollContainer: {
+    flexGrow: 1,
     padding: 24,
-    backgroundColor: '#f5f5f5',
+    paddingBottom: 40, 
   },
   titulo: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 26,
+    fontWeight: '500',
     textAlign: 'center',
     marginTop: 40,
     marginBottom: 8,
-    color: '#333',
+    color: '#5C3D35',
+    letterSpacing: 0.5,
   },
   subtitulo: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: 14,
+    color: '#8A6D65',
     textAlign: 'center',
     marginBottom: 24,
+    lineHeight: 20,
   },
   campoWrapper: { marginBottom: 16 },
-  label: { fontSize: 14, fontWeight: '600', color: '#444', marginBottom: 6 },
-  input: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    padding: 14,
-    fontSize: 16,
+  label: { 
+    fontSize: 13, 
+    fontWeight: '500', 
+    color: '#5C3D35', 
+    marginBottom: 6,
+    letterSpacing: 0.2,
   },
-  inputErro: { borderColor: 'red' },
-  erro: { color: 'red', fontSize: 12, marginTop: 4 },
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#E8CCD0',
+    borderRadius: 12,
+    padding: 14,
+    fontSize: 15,
+    color: '#5C3D35',
+  },
+  inputErro: { borderColor: '#D9534F' },
+  erro: { color: '#C94E5C', fontSize: 12, marginTop: 4 },
   chips: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
   chip: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#eee',
+    backgroundColor: '#F7E1E3',
   },
-  chipAtivo: { backgroundColor: '#6c47ff' },
+  chipAtivo: { 
+    backgroundColor: '#D97E8B'
+  },
+  chipTexto: {
+    color: '#8A6D65',
+    fontSize: 14,
+  },
+  chipTextoAtivo: {
+    color: '#FFF',
+    fontWeight: '500',
+  },
   termosRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
     marginBottom: 4,
   },
-  termosText: { fontSize: 15, color: '#333' },
+  termosText: { 
+    fontSize: 14, 
+    color: '#5C3D35' 
+  },
   botao: {
-    backgroundColor: '#6c47ff',
-    borderRadius: 10,
+    backgroundColor: '#D97E8B',
+    borderRadius: 12,
     padding: 16,
     alignItems: 'center',
     marginTop: 24,
+    shadowColor: '#D97E8B',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  botaoTexto: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  botaoTexto: { 
+    color: '#FFF', 
+    fontSize: 16, 
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  },
 });
