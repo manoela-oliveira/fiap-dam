@@ -4,20 +4,24 @@ import {
   Switch, ScrollView, Alert, StyleSheet,
   KeyboardAvoidingView, Platform,
 } from 'react-native';
-// --- Funções de máscara ---
+
+// Funções de máscara
 const formatarCPF = (v) =>
   v.replace(/\D/g, '')
    .replace(/(\d{3})(\d)/, '$1.$2')
    .replace(/(\d{3})(\d)/, '$1.$2')
    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
    .slice(0, 14);
+
 const formatarTel = (v) =>
   v.replace(/\D/g, '')
    .replace(/(\d{2})(\d)/, '($1) $2')
    .replace(/(\d{5})(\d{1,4})/, '$1-$2')
    .slice(0, 15);
-// --- Perfis disponíveis ---
+
+// Perfis disponíveis
 const PERFIS = ['Estudante', 'Profissional', 'Freelancer'];
+
 export default function App() {
   const [nome, setNome]             = useState('');
   const [email, setEmail]           = useState('');
@@ -27,9 +31,11 @@ export default function App() {
   const [termos, setTermos]         = useState(false);
   const [erros, setErros]           = useState({});
   const [carregando, setCarregando] = useState(false);
+
   const emailRef = useRef(null);
   const cpfRef   = useRef(null);
   const telRef   = useRef(null);
+
   const validar = () => {
     const e = {};
     if (!nome.trim())          e.nome   = 'Nome obrigatório';
@@ -41,6 +47,7 @@ export default function App() {
     setErros(e);
     return Object.keys(e).length === 0;
   };
+
   const handleSubmit = () => {
     if (!validar()) return;
     setCarregando(true);
@@ -49,6 +56,7 @@ export default function App() {
       Alert.alert('🎉 Cadastro realizado!', `Bem-vindo(a), ${nome}!`);
     }, 1500);
   };
+
   const Campo = ({ label, erro, children }) => (
     <View style={styles.campoWrapper}>
       <Text style={styles.label}>{label}</Text>
@@ -56,6 +64,7 @@ export default function App() {
       {erro ? <Text style={styles.erro}>{erro}</Text> : null}
     </View>
   );
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -65,8 +74,9 @@ export default function App() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.titulo}>📋 Cadastro</Text>
-        {/* Nome */}
+        <Text style={styles.titulo}>✿ Cadastro ✿</Text>
+        <Text style={styles.subtitulo}>Preencha os campos abaixo e se torne parte do nosso time!</Text>
+
         <Campo label="Nome completo" erro={erros.nome}>
           <TextInput
             placeholder="Ex: Maria Silva"
@@ -77,7 +87,7 @@ export default function App() {
             style={[styles.input, erros.nome && styles.inputErro]}
           />
         </Campo>
-        {/* E-mail */}
+
         <Campo label="E-mail" erro={erros.email}>
           <TextInput
             ref={emailRef}
@@ -91,7 +101,7 @@ export default function App() {
             style={[styles.input, erros.email && styles.inputErro]}
           />
         </Campo>
-        {/* CPF */}
+
         <Campo label="CPF" erro={erros.cpf}>
           <TextInput
             ref={cpfRef}
@@ -105,7 +115,7 @@ export default function App() {
             style={[styles.input, erros.cpf && styles.inputErro]}
           />
         </Campo>
-        {/* Telefone */}
+
         <Campo label="Telefone" erro={erros.tel}>
           <TextInput
             ref={telRef}
@@ -118,7 +128,7 @@ export default function App() {
             style={[styles.input, erros.tel && styles.inputErro]}
           />
         </Campo>
-        {/* Perfil */}
+
         <Campo label="Perfil" erro={erros.perfil}>
           <View style={styles.chips}>
             {PERFIS.map((op) => (
@@ -134,7 +144,7 @@ export default function App() {
             ))}
           </View>
         </Campo>
-        {/* Termos */}
+
         <View style={styles.termosRow}>
           <Switch
             value={termos}
@@ -144,7 +154,7 @@ export default function App() {
           <Text style={styles.termosText}>Aceito os termos de uso</Text>
         </View>
         {erros.termos ? <Text style={styles.erro}>{erros.termos}</Text> : null}
-        {/* Botão */}
+
         <TouchableOpacity
           style={[styles.botao, carregando && { opacity: 0.6 }]}
           onPress={handleSubmit}
@@ -158,18 +168,26 @@ export default function App() {
     </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1, // Alterado para flexGrow para preencher toda a tela no ScrollView
     padding: 24,
-    paddingBottom: 60,
     backgroundColor: '#f5f5f5',
   },
   titulo: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 24,
+    marginTop: 40,
+    marginBottom: 8,
     color: '#333',
+  },
+  subtitulo: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 24,
   },
   campoWrapper: { marginBottom: 16 },
   label: { fontSize: 14, fontWeight: '600', color: '#444', marginBottom: 6 },
