@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { CarrinhoProvider } from './context/ContextCarrinho';
 import ProdutosScreen from './screens/ProdutosScreen';
 import CarrinhoScreen from './screens/CarrinhoScreen';
@@ -24,20 +24,41 @@ export default function App() {
   return (
     <CarrinhoProvider>
       <View style={styles.container}>
-        <View style={styles.navContainer}>
-          <Button
-            title="Produtos"
-            onPress={() => setTelaAtual('Produtos')}
-            color={telaAtual === 'Produtos' ? '#ac37ca' : '#a8a8a8'}
-          />
-          <Button
-            title="Carrinho"
-            onPress={() => setTelaAtual('Carrinho')}
-            color={telaAtual === 'Carrinho' ? '#ac37ca' : '#a8a8a8'}
-          />
-        </View>
-
         {telaAtual === 'Produtos' ? <ProdutosScreen /> : <CarrinhoScreen />}
+
+        <View style={styles.navContainer}>
+          
+          <TouchableOpacity 
+            style={[
+              styles.navButton, 
+              { backgroundColor: telaAtual === 'Produtos' ? '#ac37ca' : 'transparent' }
+            ]} 
+            onPress={() => setTelaAtual('Produtos')}
+          >
+            <Text style={[
+              styles.navText, 
+              { color: telaAtual === 'Produtos' ? '#ffffff' : '#a8a8a8' }
+            ]}>
+              Produtos
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[
+              styles.navButton, 
+              { backgroundColor: telaAtual === 'Carrinho' ? '#ac37ca' : 'transparent' }
+            ]} 
+            onPress={() => setTelaAtual('Carrinho')}
+          >
+            <Text style={[
+              styles.navText, 
+              { color: telaAtual === 'Carrinho' ? '#ffffff' : '#a8a8a8' }
+            ]}>
+              Carrinho
+            </Text>
+          </TouchableOpacity>
+
+        </View>
       </View>
     </CarrinhoProvider>
   );
@@ -51,13 +72,23 @@ const styles = StyleSheet.create({
   navContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 10,
-    borderBottomWidth: 1,
+    paddingVertical: 12,
+    paddingBottom: 24, 
+    borderTopWidth: 1, 
     borderColor: '#282828',
-    paddingTop: 40, 
     backgroundColor: '#181818',
   },
-
+  navButton: {
+    paddingVertical: 8,
+    borderRadius: 2,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
